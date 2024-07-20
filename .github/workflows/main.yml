@@ -1,0 +1,29 @@
+name: Hugo deploy website on S3
+
+on:
+  push:
+    branches: [ main ] # Only when a push is done on main branch
+
+permissions:
+      contents: read    # This is required for actions/checkout
+
+jobs:
+  Build_and_Deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Git clone the repository
+      uses: actions/checkout@v4
+      with:
+        submodules: 'true' # Some Hugo theme are imported as a submodule, so you need it
+    # Sets up Hugo with latest version
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+          hugo-version: 'latest'
+          extended: true
+    - name: Build
+      run: hugo --minify
+    - name: Deploy to S3
+      run: hugo deploy --force
+
