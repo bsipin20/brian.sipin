@@ -2,8 +2,8 @@ terraform {
   required_version = "~> 1.1.7"
 
   backend "s3" {
-    bucket = "dairyisscary-terraform-state"
-    key    = "spookysoftware/terraform.tfstate"
+    bucket = "brianable-terraform-state"
+    key    = "brianable/terraform.tfstate"
     region = "us-east-1"
   }
 
@@ -21,7 +21,7 @@ terraform {
 }
 
 locals {
-  root_domain = "spookysoftware.dev"
+  root_domain = "brianable.dev"
 }
 
 provider "aws" {
@@ -64,7 +64,7 @@ resource "cloudflare_record" "dmarc" {
 }
 
 module "www" {
-  source = "../domains/www/infra"
+  source = "../domains/www/deploy"
 
   root_domain     = local.root_domain
   cf_root_zone_id = cloudflare_zone.root_zone.id
