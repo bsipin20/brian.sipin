@@ -2,8 +2,8 @@ terraform {
   required_version = "~> 1.1.7"
 
   backend "s3" {
-    bucket = "brianable-terraform-state"
-    key    = "brianable/terraform.tfstate"
+    bucket = "dairyisscary-terraform-state"
+    key    = "spookysoftware/terraform.tfstate"
     region = "us-east-1"
   }
 
@@ -21,7 +21,7 @@ terraform {
 }
 
 locals {
-  root_domain = "brianable.com"
+  root_domain = "spookysoftware.dev"
 }
 
 provider "aws" {
